@@ -3,7 +3,7 @@
 
     var module = angular.module('angular-bind-html-compile', []);
 
-    module.directive('bindHtmlCompile', ['$compile', function ($compile) {
+    module.directive('bindHtmlCompile', ['$compile', '$timeout', function ($compile, $timeout) {
         return {
             restrict: 'A',
             link: function (scope, element, attrs) {
@@ -20,6 +20,10 @@
                         compileScope = scope.$eval(attrs.bindHtmlScope);
                     }
                     $compile(element.contents())(compileScope);
+
+                    $timeout(function() {
+                        $.validator.unobtrusive.parse(element.find("form"));
+                    });
                 });
             }
         };
