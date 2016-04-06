@@ -23,6 +23,7 @@
 
                     $timeout(function() {
                         $.validator.unobtrusive.parse(element.find("form"));
+                        Metronic.initPopovers(element.find(".popovers"));
                     });
                 });
             }
